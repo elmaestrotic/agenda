@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Inicio</title>
+</head>
+
+<body>
+<div th:if="${msgExito ne null}">
+    [[${msgExito}]]
+</div>
+
+<h3>Lista de usuarios</h3>
+Nuevo usuario: <a href="/nuevo">Crear usuario</a>
+</body>
+</html>
