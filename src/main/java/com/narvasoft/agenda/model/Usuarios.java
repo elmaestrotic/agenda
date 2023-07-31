@@ -2,34 +2,35 @@ package com.narvasoft.agenda.model;
 
 
 import jakarta.persistence.*;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import lombok.*;
 
+@Data
 @Entity
 @Table(name = "usuarios")
 @ToString
 @Getter
 @Setter
 @EqualsAndHashCode
-public class Usuarios  {
+public class Usuarios {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
-    @Column(name = "id")
+    //@Column(name = "id")
     private Long id;
-
-    @Column(name = "nombre")
+    @NotBlank
+    //@Column(name = "nombre")
     private String nombre;
-
-    @Column(name = "password")
+    @NotEmpty
+    //@Column(name = "password")
     private String password;
-
-    @Column(name = "email", nullable = false, length = 50, unique = true)
+    @NotEmpty
+    //@Column(name = "email", nullable = false, length = 50, unique = true)
     private String email;
 
-    @Column(name = "telefono")
+    //@Column(name = "telefono")
     private String telefono;
 }

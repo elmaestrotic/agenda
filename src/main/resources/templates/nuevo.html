@@ -2,34 +2,56 @@
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>[[${usuario.id ne null ? '  Editar' : 'Nuevo'}]] usuario</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
 </head>
-<body>
-<h3>Nuevo usuario</h3>
-<form action="">
-  <div>
-    <label for="nombre">Nombre</label>
-    <input type="text" placeholder="Ingrese un nombre" id="nombre">
-  </div>
+<body class="container">
+<div class="row justify-content-center">
+    <div class="col-md-6 col-lg-4">
+    <h3>[[${usuario.id ne null ? '  Editar' : 'Nuevo'}]] usuario</h3>
+    <form action="" method="post" th:object="${usuario}">
+      <div class="mb-3">
+           <label for="nombre">Nombre</label>
+           <input id="nombre" type="text" placeholder="Ingrese un nombre" th:field="*{nombre}" class="form-control"
+                  th:errorclass="*{nombre}">
 
-  <div>
-    <label for="password">Password</label>
-    <input type="text" placeholder="Ingrese una contraseña" id="password">
-  </div>
+            <div th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}" class=" invalid-feedback"></div>
+        </div>
 
+         <div class="mb-3">
+        <label for="password">Password</label>
+        <input type="text" placeholder="Ingrese una contraseña" id="password" th:field="*{password}"
+               class="form-control" th:errorclass="*{password}">
 
-  <div>
-    <label for="email">Email</label>
-    <input type="email" placeholder="Ingrese un email" id="email">
-  </div>
+             <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class=" invalid-feedback"></div>
+        </div>
 
-  <div>
-    <label for="telefono">Telefono</label>
-    <input type="text" placeholder="Ingrese un telefono" id="telefono">
+    <div class="mb-3">
+        <label for="email">Email</label>
+        <input type="email" placeholder="Ingrese un email" id="email" th:field="*{email}" class="form-control"
+               th:errorclass="*{email}">
+
+        <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+    </div>
+
+    <div class="mb-3">
+        <label for="telefono">Telefono</label>
+        <input type="text" placeholder="Ingrese un telefono" id="telefono" th:field="*{telefono}" class="form-control"
+               th:errorclass="*{telefono}">
+
+        <div th:if="${#fields.hasErrors('telefono')}" th:errors="*{telefono}"></div>
+    </div>
+    <div class="text-end">
+        <button class="btn btn-primary">
+            Guardar
+        </button>
+        <a href="/" class="btn btn-light ms-2">Cancelar</a>
+    </div>
 </div>
-<button type="submit">Guardar</button>
-  <a href="/">Cancelar</a>
+</div>
 </form>
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
