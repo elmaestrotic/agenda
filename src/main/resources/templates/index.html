@@ -3,14 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <title>Inicio</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+
 </head>
 
 <body>
-<div th:if="${msgExito ne null}">
+<div class="container">
+<div th:if="${msgExito ne null}" class="alert alert-success alert-dismissible">
     [[${msgExito}]]
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 </div>
 
 <h3>Lista de usuarios</h3>
-Nuevo usuario: <a href="/nuevo">Crear usuario</a>
+
+<div class="text-center my-3">
+    <a href="/nuevo" class="btn btn-primary">Crear usuario</a>
+Nuevo usuario: <a href="/nuevo" class="btn btn-primary">Crear usuario</a>
+</div>
+
+<table class="table table-hover">
+    <thead>
+    <tr>
+        <th>Nombre</th>
+        <th>Password</th>
+        <th>Email</th>
+        <th>Teléfono</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="usuario : ${usuarios}">
+        <td th:text="${usuario.nombre}"></td>
+        <td th:text="${usuario.password}"></td>
+        <td th:text="${usuario.email}"></td>
+        <td th:text="${usuario.telefono}"></td>
+        <td>
+            <a th:href="@{/editar/{id}(id=${usuario.id})}">Editar</a>
+            <a th:href="@{/eliminar/{id}(id=${usuario.id})}">Eliminar</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+    </div>
 </body>
 </html>
