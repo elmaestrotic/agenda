@@ -37,31 +37,33 @@ public class UsuariosController {
                         BindingResult bindingResult,
                         Model model,
                         RedirectAttributes attr) {
-       if (bindingResult.hasErrors()) {
-           model.addAttribute("usuario", usuario);
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("usuario", usuario);
             return "nuevo";
         }
         usuariosRepository.save(usuario);
         attr.addFlashAttribute("msgExito", "Usuario creado exitosamente");
         return "redirect:/";
     }
-@GetMapping("/{id}/editar")
-public String editar(@PathVariable Long id, Model model) {
-    Usuarios usuario = usuariosRepository.getById(id);
-    model.addAttribute("usuario", usuario);
-    return "nuevo";//al momento de editar se redirecciona a la vista nuevo.html
-}
 
-    @PostMapping("/{id}editar")
+    @GetMapping("/{id}/editar")
+    public String editar(@PathVariable Long id, Model model) {
+        Usuarios usuario = usuariosRepository.getById(id);
+        model.addAttribute("usuario", usuario);
+        return "nuevo";//al momento de editar se redirecciona a la vista nuevo.html
+    }
+
+    @PostMapping("/{id}/editar")
     public String editar(
-                        @PathVariable Long id,
-                        @Validated Usuarios usuario,
-                        BindingResult bindingResult,
-                        Model model,
-                        RedirectAttributes attr) {
+            @PathVariable Long id,
+            @Validated Usuarios usuario,
+            BindingResult bindingResult,
+            Model model,
+            RedirectAttributes attr) {
         Usuarios usuarioFromBD = usuariosRepository.getById(id);
-       if (bindingResult.hasErrors()) {
-           model.addAttribute("usuario", usuario);
+
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("usuario", usuario);
             return "nuevo";
         }
         usuarioFromBD.setNombre(usuario.getNombre());
@@ -75,10 +77,11 @@ public String editar(@PathVariable Long id, Model model) {
         return "redirect:/";
     }
 
-    @GetMapping("/{id}/eliminar")
+    @PostMapping("/{id}/eliminar")
     public String eliminar(@PathVariable Long id, RedirectAttributes attr) {
         Usuarios usuario = usuariosRepository.getById(id);
-
+        usuariosRepository.delete(usuario);
+        attr.addFlashAttribute("msgExito", "Usuario eliminado exitosamente");
         return "redirect:/";
     }
 

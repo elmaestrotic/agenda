@@ -15,7 +15,7 @@
       <div class="mb-3">
            <label for="nombre">Nombre</label>
            <input id="nombre" type="text" placeholder="Ingrese un nombre" th:field="*{nombre}" class="form-control"
-                  th:errorclass="*{nombre}">
+                  th:errorclass="is-invalid">
 
             <div th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}" class=" invalid-feedback"></div>
         </div>
@@ -23,7 +23,7 @@
          <div class="mb-3">
         <label for="password">Password</label>
         <input type="text" placeholder="Ingrese una contraseña" id="password" th:field="*{password}"
-               class="form-control" th:errorclass="*{password}">
+               class="form-control" th:errorclass="is-invalid">
 
              <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class=" invalid-feedback"></div>
         </div>
@@ -31,17 +31,17 @@
     <div class="mb-3">
         <label for="email">Email</label>
         <input type="email" placeholder="Ingrese un email" id="email" th:field="*{email}" class="form-control"
-               th:errorclass="*{email}">
+               th:errorclass="is-invalid">
 
-        <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+        <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="invalid-feedback"></div>
     </div>
 
     <div class="mb-3">
         <label for="telefono">Telefono</label>
         <input type="text" placeholder="Ingrese un telefono" id="telefono" th:field="*{telefono}" class="form-control"
-               th:errorclass="*{telefono}">
+               th:errorclass="is-invalid">
 
-        <div th:if="${#fields.hasErrors('telefono')}" th:errors="*{telefono}"></div>
+        <div th:if="${#fields.hasErrors('telefono')}" th:errors="*{telefono}" class="invalid-feedback"></div>
     </div>
     <div class="text-end">
         <button class="btn btn-primary">

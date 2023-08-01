@@ -1,95 +1,54 @@
 <!DOCTYPE html>
-<html lang="es"><head>
+<html lang="es">
+<head>
     <meta charset="UTF-8">
-    <title>Inicio</title>
+    <title>Home</title>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
 
 </head>
 
 <body>
 <div class="container">
+    <div th:if="${msgExito ne null}" class="alert-sucess alert-dismissible"></div>
+    [[${msgExito}]]
+    <button type="button" class="btn btn-close" data-bs-dismiss="alert"></button>
+</div>
 
+<h3>Lista de usuarios</h3>
 
-    <h3>Lista de usuarios</h3>
+<div class="text-center my-3">
+    <a href="/nuevo" class="btn btn-primary">Nuevo usuario</a></div>
+<table class="table table-hover">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Password</th>
+        <th>Email</th>
+        <th>Teléfono</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="usuario : ${usuarios}">
+        <td th:text="${usuario.id}"></td>
+        <td th:text="${usuario.nombre}"></td>
+        <td th:text="${usuario.password}"></td>
+        <td th:text="${usuario.telefono}"></td>
+        <td class="text-end">
+            <a th:href="@{/{id}/editar(id=${usuario.id})}" class="btn btn-sm btn-primary">
+                Editar
+            </a>
+            <a href="#" onclick="eliminarUsuario(this)" class="btn btn-danger btn-sm">
+                Eliminar
+            </a>
+            <form th:action="@{/{id}/eliminar(id=${usuario.id})}" method="post"></form>
+        </td>
+    </tr>
 
-    <div class="text-center my-3">
-        <a href="/nuevo" class="btn btn-primary">Crear usuario</a>
-        Nuevo usuario: <a href="/nuevo" class="btn btn-primary">Crear usuario</a>
-    </div>
-
-    <table class="table table-hover">
-        <thead>
-        <tr>
-            <th>Nombre</th>
-            <th>Password</th>
-            <th>Email</th>
-            <th>Teléfono</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td>Pepito</td>
-            <td>123456</td>
-            <td>pepito@gmail.com</td>
-            <td>5555</td>
-            <td class="text-end">
-                <a href="/1/editar" class="btn btn-sm btn-primary">
-                    Editar
-                </a>
-                <a href="#" onclick="eliminarUsuario(this)" class="btn btn-danger btn-sm">
-                    Eliminar
-                </a>
-                <form action="/1/eliminar" method="post"></form>
-            </td>
-        </tr>
-        <tr>
-            <td>Heidy</td>
-            <td>1234567955</td>
-            <td>pepito4@gmail.com</td>
-            <td>55566</td>
-            <td class="text-end">
-                <a href="/5/editar" class="btn btn-sm btn-primary">
-                    Editar
-                </a>
-                <a href="#" onclick="eliminarUsuario(this)" class="btn btn-danger btn-sm">
-                    Eliminar
-                </a>
-                <form action="/5/eliminar" method="post"></form>
-            </td>
-        </tr>
-        <tr>
-            <td>Ana</td>
-            <td>bekoaj</td>
-            <td>ana@gmaail.com</td>
-            <td>88888</td>
-            <td class="text-end">
-                <a href="/7/editar" class="btn btn-sm btn-primary">
-                    Editar
-                </a>
-                <a href="#" onclick="eliminarUsuario(this)" class="btn btn-danger btn-sm">
-                    Eliminar
-                </a>
-                <form action="/7/eliminar" method="post"></form>
-            </td>
-        </tr>
-        <tr>
-            <td>fgd</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td class="text-end">
-                <a href="/8/editar" class="btn btn-sm btn-primary">
-                    Editar
-                </a>
-                <a href="#" onclick="eliminarUsuario(this)" class="btn btn-danger btn-sm">
-                    Eliminar
-                </a>
-                <form action="/8/eliminar" method="post"></form>
-            </td>
-        </tr>
-        </tbody>
-    </table>
+    </tbody>
+</table>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
@@ -102,4 +61,5 @@
     }
 </script>
 
-</body></html>
+</body>
+</html>
