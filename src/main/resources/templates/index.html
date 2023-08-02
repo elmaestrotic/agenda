@@ -36,6 +36,7 @@
             <td th:text="${usuario.id}"></td>
             <td th:text="${usuario.nombre}"></td>
             <td th:text="${usuario.password}"></td>
+            <td th:text="${usuario.email}"></td>
             <td th:text="${usuario.telefono}"></td>
             <td class="text-end">
                 <a th:href="@{/{id}/editar(id=${usuario.id})}" class="btn btn-sm btn-primary">
