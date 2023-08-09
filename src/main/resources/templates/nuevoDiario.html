@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>[[${diario.id ne null ? ' Editar' : 'Nuevo'}]] diario</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+</head>
+<body class="container">
+<div class="row justify-content-center">
+    <div class="col-md-6 col-lg-4">
+        <h3>[[${diario.id ne null ? ' Editar' : 'Nuevo'}]] diario</h3>
+        <form action="" method="post" th:object="${diario}">
+            <div class="mb-3">
+                <label for="fecha">Fecha</label>
+                <input id="fecha" type="date" placeholder="Fecha de la clase" th:field="*{fecha}" class="form-control"
+                       th:errorclass="is-invalid">
+
+                <div th:if="${#fields.hasErrors('fecha')}" th:errors="*{fecha}" class=" invalid-feedback"></div>
+            </div>
+
+            <div class="mb-3">
+                <label for="grado">Grado</label>
+                <input type="text" placeholder="Ingrese el grado" id="grado" th:field="*{grado}"
+                       class="form-control" th:errorclass="is-invalid">
+
+                <div th:if="${#fields.hasErrors('grado')}" th:errors="*{grado}" class=" invalid-feedback"></div>
+            </div>
+
+
+            <div class="mb-3">
+                <label for="seccion">Sección</label>
+                <input type="text" placeholder="Ingrese una sección" id="seccion" th:field="*{seccion}"
+                       class="form-control"
+                       th:errorclass="is-invalid">
+
+                <div th:if="${#fields.hasErrors('seccion')}" th:errors="*{seccion}" class="invalid-feedback"></div>
+            </div>
+
+
+
+
+            <div class="mb-3">
+                <label for="asignatura">Asignatura</label>
+                <input type="text" placeholder="Ingrese una materia" id="asignatura" th:field="*{asignatura}"
+                       class="form-control"
+                       th:errorclass="is-invalid">
+
+                <div th:if="${#fields.hasErrors('asignatura')}" th:errors="*{asignatura}"
+                     class="invalid-feedback"></div>
+            </div>
+
+            <div class="mb-3">
+                <label for="descripcion">Descripción</label>
+                <textArea placeholder="Describa los temas vistos en esta clase" id="descripcion" th:field="*{descripcion}"
+                       class="form-control"
+                       th:errorclass="is-invalid" maxlength="1000"  rows="5"> </textArea>
+
+                <div th:if="${#fields.hasErrors('descripcion')}" th:errors="*{descripcion}"
+                     class="invalid-feedback" ></div>
+            </div>
+
+            <div class="mb-3">
+                <label for="reflexion">Reflexión</label>
+                <textarea  placeholder="Ingrese la reflexión pedagógica" id="reflexion" th:field="*{reflexion}"
+                       class="form-control"
+                       th:errorclass="is-invalid" maxlength="1000" rows="5"> </textArea>
+
+                <div th:if="${#fields.hasErrors('reflexion')}" th:errors="*{reflexion}"
+                     class="invalid-feedback"></div>
+            </div>
+
+
+            <div class="text-end">
+                <button class="btn btn-primary">
+                    Guardar
+                </button>
+                <a href="/static" class="btn btn-light ms-2">Cancelar</a>
+            </div>
+        </form>
+    </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

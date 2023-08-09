@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>[[${sala.id ne null ? ' Editar' : 'Nuevo'}]] sala</title>
+
+    <link rel="stylesheet" href="main.css">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+</head>
+
+<style>
+    body{
+        font-family: 'Roboto', sans-serif;
+    }
+
+    .container{
+        width: 100%;
+        margin: 0 auto;
+    }
+
+    #sala{
+        float: right;
+        width: 50%;
+        justify-content: center;
+    }
+
+    #sala table{
+        text-align: right;
+    }
+
+    #sala th{
+        padding: 10px;
+        display: inline-block;
+        width: 18%;
+    }
+</style>
+<body class="container">
+
+    <div id="sala">
+    <h3>Salas</h3>
+
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th><img th:src="@{/images/pc.png}" class="img-fluid"><br>Pc1<input id="pc1" type="checkbox"></th>
+            <img th:src="@{http://localhost:8080/salas/static/images/pc.png}" class="img-fluid">.
+            <th><img src="templates/images/pc.png" class="img-fluid"><br>Pc3<input id="pc3" type="checkbox"></th>
+            <th><img th:src="@{/static/images/pc.png}" class="img-fluid"><br>Pc4<input id="pc4" type="checkbox"></th>
+            <th><img src="images/pc.png" class="img-fluid"><br>Pc5<input id="pc5" type="checkbox"></th>
+        </tr>
+        <tr>
+            <th><img th:src="@{/images/pc.png}" class="img-fluid"><br>Pc6<input id="pc6" type="checkbox"></th>
+            <th><img src="images/pc.png" class="img-fluid"><br>Pc7<input id="pc7" type="checkbox"></th>
+            <th><img src="images/pc.png" class="img-fluid"><br>Pc8<input id="pc8" type="checkbox"></th>
+            <th><img src="images/pc.png" class="img-fluid"><br>Pc9<input id="pc9" type="checkbox"></th>
+            <th><img src="images/pc.png" class="img-fluid"><br>Pc10<input id="pc10" type="checkbox"></th>
+        </tr>
+        <tr th:each="sala : ${salas}">
+            <td th:text="${sala.pc1}"></td>
+            <td th:text="${sala.pc2}"></td>
+            <td th:text="${sala.pc3}"></td>
+            <td th:text="${sala.pc4}"></td>
+            <td th:text="${sala.pc5}"></td>
+            <td th:text="${sala.pc6}"></td>
+            <td th:text="${sala.pc7}"></td>
+            <td th:text="${sala.pc8}"></td>
+            <td th:text="${sala.pc9}"></td>
+            <td th:text="${sala.pc10}"></td>
+        </tr>
+
+        </thead>
+    </table>
+</div>
+
+<div class="justify-content-center">
+    <div class="col-md-6 col-lg-4">
+        <h3>[[${sala.id ne null ? ' Editar' : 'Nuevo'}]] sala</h3>
+        <form action="" method="post" th:object="${sala}">
+            <div class="mb-3">
+                <label for="fecha">Fecha</label>
+                <input id="fecha" type="date" placeholder="Fecha de la clase" th:field="*{fecha}" class="form-control"
+                       th:errorclass="is-invalid">
+
+                <div th:if="${#fields.hasErrors('fecha')}" th:errors="*{fecha}" class=" invalid-feedback"></div>
+            </div>
+
+            <div class="mb-3">
+                <label for="grado">Grado</label>
+                <input type="text" placeholder="Ingrese el grado" id="grado" th:field="*{grado}"
+                       class="form-control" th:errorclass="is-invalid">
+
+                <div th:if="${#fields.hasErrors('grado')}" th:errors="*{grado}" class=" invalid-feedback"></div>
+            </div>
+
+
+            <div class="mb-3">
+                <label for="seccion">Sección</label>
+                <input type="text" placeholder="Ingrese una sección" id="seccion" th:field="*{seccion}"
+                       class="form-control"
+                       th:errorclass="is-invalid">
+
+                <div th:if="${#fields.hasErrors('seccion')}" th:errors="*{seccion}" class="invalid-feedback"></div>
+            </div>
+
+
+
+
+            <div class="mb-3">
+                <label for="asignatura">Asignatura</label>
+                <input type="text" placeholder="Ingrese una materia" id="asignatura" th:field="*{asignatura}"
+                       class="form-control"
+                       th:errorclass="is-invalid">
+
+                <div th:if="${#fields.hasErrors('asignatura')}" th:errors="*{asignatura}"
+                     class="invalid-feedback"></div>
+            </div>
+
+
+
+
+
+
+
+
+            <div class="mb-3">
+                <label for="novedad">Novedad</label>
+                <textArea placeholder="Describa la novedad encontrada al momento de recibir el aula" id="novedad" th:field="*{novedad}"
+                       class="form-control"
+                       th:errorclass="is-invalid" maxlength="1000"  rows="5"> </textArea>
+
+                <div th:if="${#fields.hasErrors('novedad')}" th:errors="*{novedad}"
+                     class="invalid-feedback" ></div>
+            </div>
+
+
+
+
+            <div class="text-end">
+                <button class="btn btn-primary">
+                    Guardar
+                </button>
+                <a href="/static" class="btn btn-light ms-2">Cancelar</a>
+            </div>
+        </form>
+    </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
