@@ -17,48 +17,50 @@
         <button type="button" class="btn btn-close" data-bs-dismiss="alert"></button>
     </div>
 
-    <h3>Lista de usuarios</h3>
+    <h3>Diarios de Campo</h3>
 
     <div class="text-center my-3">
-        <a href="/nuevo" class="btn btn-primary">Nuevo usuario</a></div>
+        <a href="/diarios/nuevo" class="btn btn-primary">Nuevo Registro de Clase</a></div>
     <table class="table table-hover">
         <thead>
         <tr>
             <th>ID</th>
-            <th>Nombre</th>
-            <th>Password</th>
-            <th>Email</th>
-            <th>Teléfono</th>
+            <th>Fecha</th>
+            <th>Grado</th>
+            <th>Sección</th>
+            <th>Asignatura</th>
+            <th>Descripción</th>
+            <th>Reflexión</th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="usuario : ${usuarios}">
-            <td th:text="${usuario.id}"></td>
-            <td th:text="${usuario.nombre}"></td>
-            <td th:text="${usuario.password}"></td>
-            <td th:text="${usuario.email}"></td>
-            <td th:text="${usuario.telefono}"></td>
+        <tr th:each="diario : ${diarios}">
+            <td th:text="${diario.id}"></td>
+            <td th:text="${diario.fecha}"></td>
+            <td th:text="${diario.grado}"></td>
+            <td th:text="${diario.seccion}"></td>
+            <td th:text="${diario.asignatura}"></td>
+            <td th:text="${diario.descripcion}"></td>
+            <td th:text="${diario.reflexion}"></td>
             <td class="text-end">
-                <a th:href="@{/{id}/editar(id=${usuario.id})}" class="btn btn-sm btn-primary">
+                <a th:href="@{/diarios/{id}/editar(id=${diario.id})}" class="btn btn-sm btn-primary">
                     Editar
                 </a>
-                <a href="#" onclick="eliminarUsuario(this)" class="btn btn-danger btn-sm">
+                <a href="#" onclick="eliminarRegistro(this)" class="btn btn-danger btn-sm">
                     Eliminar
                 </a>
-                <form th:action="@{/{id}/eliminar(id=${usuario.id})}" method="post"></form>
+                <form th:action="@{/diarios/{id}/eliminar(id=${diario.id})}" method="post"></form>
             </td>
         </tr>
 
         </tbody>
     </table>
-    <a href="/diarios">Ir a Diarios de Campo</a>
-    <a href="/salas">Ir a Salas de Informática</a>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-    function eliminarUsuario(elemen) {
-        var ok = confirm("¿Está seguro de eliminar el usuario?");
+    function eliminarRegistro(elemen) {
+        var ok = confirm("¿Está seguro de eliminar el registro de la clase?");
         if (ok) {
             elemen.nextElementSibling.submit();
         }
