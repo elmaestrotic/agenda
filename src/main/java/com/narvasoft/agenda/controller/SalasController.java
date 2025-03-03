@@ -28,19 +28,13 @@ public class SalasController {
         return "salas";
     }
 
-    @GetMapping("/nuevo")
-    public String nuevo(Model model) {
-        model.addAttribute("sala", new Salas());
-        return "nuevoSala";
     }
 
-    @PostMapping("/nuevo")
     public String crear(@Validated Salas sala,
                         BindingResult bindingResult,
                         Model model,
                         RedirectAttributes attr) {
         if (bindingResult.hasErrors()) {
-            model.addAttribute("sala", sala);
             return "nuevoSala";
         }
         salasRepository.save(sala);
@@ -52,7 +46,6 @@ public class SalasController {
     public String editar(@PathVariable Long id, Model model) {
         Salas sala = salasRepository.getById(id);
         model.addAttribute("sala", sala);
-        return "nuevoSala";
     }
 
     @PostMapping("/{id}/editar")
@@ -66,27 +59,16 @@ public class SalasController {
 
         if (bindingResult.hasErrors()) {
             model.addAttribute("sala", sala);
-            return "nuevoSala";
         }
         salaFromBD.setFecha(sala.getFecha());
         salaFromBD.setGrado(sala.getGrado());
         salaFromBD.setSeccion(sala.getSeccion());
         salaFromBD.setAsignatura(sala.getAsignatura());
         salaFromBD.setPc1(sala.isPc1());
-        salaFromBD.setPc2(sala.isPc2());
-        salaFromBD.setPc3(sala.isPc3());
-        salaFromBD.setPc4(sala.isPc4());
-        salaFromBD.setPc5(sala.isPc5());
-        salaFromBD.setPc6(sala.isPc6());
-        salaFromBD.setPc7(sala.isPc7());
-        salaFromBD.setPc8(sala.isPc8());
-        salaFromBD.setPc9(sala.isPc9());
-        salaFromBD.setPc10(sala.isPc10());
         salaFromBD.setNovedad(sala.getNovedad());
 
         salasRepository.save(salaFromBD);
 
-        attr.addFlashAttribute("msgExito", "Registro actualizado exitosamente");
         return "redirect:/salas";
     }
 
@@ -94,7 +76,6 @@ public class SalasController {
     public String eliminar(@PathVariable Long id, RedirectAttributes attr) {
         Salas sala = salasRepository.getById(id);
         salasRepository.delete(sala);
-        attr.addFlashAttribute("msgExito", "Registro eliminado exitosamente");
         return "redirect:/salas";
     }
 }

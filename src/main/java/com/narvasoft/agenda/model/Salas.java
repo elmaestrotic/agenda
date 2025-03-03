@@ -16,13 +16,10 @@ public class Salas {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     @NotBlank
     private String fecha;
-
     @NotEmpty
     private String grado;
-
     @NotEmpty
     private String seccion;
 
